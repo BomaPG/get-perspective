@@ -165,6 +165,11 @@ body {
   overflow: hidden;
   box-shadow: 0 12px 40px rgba(124,111,224,0.28);
   position: relative;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.persp-modal--receded {
+  opacity: 0.5;
+  transform: scale(0.97);
 }
 .persp-modal-orb {
   position: absolute;
@@ -196,6 +201,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.12s;
+  z-index: 2;
 }
 .persp-modal__close:hover { background: rgba(255,255,255,0.8); }
 .persp-modal__label {
@@ -756,7 +762,7 @@ body {
   position: fixed;
   inset: 0;
   background: rgba(40,30,20,0.38);
-  z-index: 200;
+  z-index: 500;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -3119,6 +3125,7 @@ function deleteNote(id){
 function shareTodayPersp(){
   _shareState = {ck: null, w: _todayPerspData.w, p: _todayPerspData.p};
   document.getElementById('actionSheetOverlay').style.display='flex';
+  document.getElementById('perspModalPanel').classList.add('persp-modal--receded');
 }
 let _shareState = {};
 
@@ -3132,6 +3139,7 @@ function openShareSheet(ck){
 function closeActionSheet(e){
   if(e && e.target!==document.getElementById('actionSheetOverlay')) return;
   document.getElementById('actionSheetOverlay').style.display='none';
+  document.getElementById('perspModalPanel').classList.remove('persp-modal--receded');
 }
 
 function doCopy(){
